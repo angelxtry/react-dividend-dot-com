@@ -1,41 +1,50 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 
-const StockItem = ({ stock }) => {
-  console.log("StockItem: ", stock.stockName, stock.shares, stock.dividend);
+const StockList = ({ stock }) => {
+  // console.log(
+  //   "StockItem: ",
+  //   stock.stockShortCode,
+  //   stock.shares,
+  //   stock.dividend
+  // );
   return (
-    <StockItems>
-      <StockName>{stock.stockName}</StockName>
+    <StockItem>
+      <StockName>{stock.stockShortCode}</StockName>
       <Shares>{stock.shares}</Shares>
       <Dividend>{stock.dividend}</Dividend>
-    </StockItems>
+    </StockItem>
   );
 };
 
 const StockItemsComponent = ({ stockItems }) => {
-  console.log("StockItems: ", stockItems);
+  // console.log("StockItems: ", stockItems);
   return (
     <Fragment>
       <div>
         {stockItems.map((stock, index) => (
-          <StockItem key={index} stock={stock} />
+          <StockList key={index} stock={stock} />
         ))}
       </div>
     </Fragment>
   );
 };
 
-const StockItems = styled.div`
+const StockItem = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr 2fr;
-  grid-template-rows: auto;
-  grid-template-areas: "stockName shares dividend";
-  grid-gap: 1px;
+  grid-template-areas: "stockShortCode shares dividend";
+  grid-gap: 2px;
+  font-family: ${props => props.theme.specialFont};
+  font-size: 12px;
+  padding-bottom: 10px;
 `;
 
 const StockName = styled.div`
-  grid-area: stockName;
+  grid-area: stockShortCode;
   width: 50px;
+  /* font-family: ${props => props.theme.specialFont};
+  font-size: 6px; */
 `;
 
 const Shares = styled.div`

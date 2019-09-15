@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 
-import useInput from "./useInput";
+import useInput from "../CustomHooks/useInput";
 
 const StockAddComponent = ({ stockList, setStockList }) => {
-  const [stockName, setStockName, onChangeStockName] = useInput("");
+  const [stockShortCode, setStockName, onChangeStockName] = useInput("");
   const [shares, setShares, onChangeShares] = useInput("");
   const [dividend, setDividend, onChangeDividend] = useInput("");
 
   const addStock = event => {
     const newStock = {
-      stockName: stockName,
+      stockShortCode: stockShortCode,
       shares: shares,
       dividend: dividend
     };
@@ -24,7 +24,7 @@ const StockAddComponent = ({ stockList, setStockList }) => {
   return (
     <form onSubmit={addStock}>
       <FormStyle>
-        <StockName value={stockName} onChange={onChangeStockName} />
+        <StockName value={stockShortCode} onChange={onChangeStockName} />
         <Shares value={shares} onChange={onChangeShares} />
         <Dividend value={dividend} onChange={onChangeDividend} />
       </FormStyle>
@@ -37,8 +37,11 @@ const FormStyle = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr 2fr;
   grid-template-rows: auto;
-  grid-template-areas: "stockName shares dividend";
+  grid-template-areas: "stockShortCode shares dividend";
   grid-gap: 1px;
+  margin: 0;
+  padding: 10px 0 0 12px;
+  /* border: 1px solid #F1F1F1; */
 `;
 
 const Input = styled.input.attrs({
@@ -48,7 +51,7 @@ const Input = styled.input.attrs({
 `;
 
 const StockName = styled(Input)`
-  grid-area: stockName;
+  grid-area: stockShortCode;
   width: 50px;
 `;
 
